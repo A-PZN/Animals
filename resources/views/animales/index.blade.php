@@ -88,7 +88,7 @@
                 <li class="flex items-center justify-between bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition group">
                     <!-- Info del Animal -->
                     <div class="flex items-center gap-4">
-                        <div>
+                        <div class="capitalize">
                           <h3>{{ $animal['name'] ?? $animal['nombre'] ?? 'Sin nombre' }}</h3>  
                           <p>{{ $animal['species'] ?? $animal['especie'] ?? 'Sin especie' }}</p>  
                           <h3>{{ $animal['age'] ?? $animal['edad'] ?? 0 }} años</h3>
