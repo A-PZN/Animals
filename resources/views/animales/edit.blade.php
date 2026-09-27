@@ -18,26 +18,34 @@
             
             <div class="mb-4">
                 <label for="nombre" class="block text-gray-300 font-bold mb-2"></label>
-                <input type="text" name="nombre" id="nombre" 
-                       value="{{ $animal['nombre'] }}" 
+                    <input type="text" id="name" name="name"
+                       value="{{ old('name', $animal['name'] ?? $animal['nombre'] ?? '') }}"
                        class="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded text-white focus:outline-none focus:border-yellow-500"
                        placeholder="Nombre" required>
             </div>
-
+              <div class="mb-4">
+                <label for="edad" class="block text-gray-300 font-bold mb-2"></label>
+                <input type="number" id="age" name="age"
+                       value="{{ old('age', $animal['age'] ?? $animal['edad'] ?? '') }}"
+                       class="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded text-white focus:outline-none focus:border-yellow-500"
+                       placeholder="Edad" required>
+                       
+            </div>
             
             <div class="mb-6">
-                <label for="especie" class="block text-gray-300 font-bold mb-2"></label>
-                <select name="especie" id="especie" 
+                <label for="species" class="block text-gray-300 font-bold mb-2"></label>
+                <select name="species" id="species" 
                         class="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded text-white focus:outline-none focus:border-yellow-500"
                         required>
                     <option value="">Selecciona una especie</option>
                     <!-- 
                      si la opción coincide con la especie actual, se marca como 'selected'.
                     -->
-                    <option value="Perro" {{ $animal['especie'] == 'Perro' ? 'selected' : '' }}>Perro</option>
-                    <option value="Gato" {{ $animal['especie'] == 'Gato' ? 'selected' : '' }}>Gato</option>
-                    <option value="Ave" {{ $animal['especie'] == 'Ave' ? 'selected' : '' }}>Ave</option>
-                    <option value="Otro" {{ $animal['especie'] == 'Otro' ? 'selected' : '' }}>Otro</option>
+                     
+                    <option value="Perro" {{ $animal['species'] == 'Perro' ? 'selected' : '' }}>Perro</option>
+                    <option value="Gato" {{ $animal['species'] == 'Gato' ? 'selected' : '' }}>Gato</option>
+                    <option value="Ave" {{ $animal['species'] == 'Ave' ? 'selected' : '' }}>Ave</option>
+                    <option value="Otro" {{ $animal['species'] == 'Otro' ? 'selected' : '' }}>Otro</option>
                 </select>
             </div>
 

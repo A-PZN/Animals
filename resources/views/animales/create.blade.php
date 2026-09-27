@@ -21,6 +21,14 @@
                        placeholder="Nombre" required>
             </div>
 
+             <!--Campo  Edad -->
+            <div class="flex flex-col">
+                <label for="Edad" class="text-sm font-semibold text-white mb-1"></label>
+                <input type="number" name="edad" id="edad" 
+                       class="bg-gray-700 border  text-white rounded-lg px-4 py-2 focus:outline-none focus:border-fuchsia-400 focus:ring-1 focus:ring-teal-500 transition"
+                       placeholder="Edad" required>
+            </div>
+
             <!-- Select -->
             <div class="flex flex-col">
                 <label for="especie" class="text-sm font-semibold text-gray-400 mb-1"></label>

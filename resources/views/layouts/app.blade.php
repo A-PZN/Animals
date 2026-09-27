@@ -23,13 +23,21 @@
                 Animal<span class="text-fuchsia-400">App</span>
             </a>
 
-            <div class="flex space-x-8">
+            <div class="flex space-x-6">
                 <a href="{{ route('animales.index') }}" class="text-sm font-bold text-gray-300 hover:text-fuchsia-400 transition">
                     Inicio
                 </a>
                 <a href="{{ route('animales.create') }}" class="text-sm font-bold text-gray-300 hover:text-fuchsia-400 transition">
                     Registra
                 </a>
+                <form action="{{ route('animales.reset') }}" method="POST" class="inline flex items-center">
+                @csrf
+                 <button type="submit" 
+                         class="text-sm font-bold text-gray-300 hover:text-red-500 transition cursor-pointer bg-transparent border-0 p-0"
+                         onclick="return confirm('¿Estás seguro de que deseas eliminar todos los animales registrados?')">
+                     Resetear
+                 </button>
+    </form>
             </div>
         </div>
     </nav>
