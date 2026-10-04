@@ -11,7 +11,7 @@ class AnimalSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    //se crea un metodo run que  muetra los  datos iniciales 
+    //se crea un metodo run que  muestra los  datos iniciales 
     public function run(): void
     {
         $animals = [
@@ -20,7 +20,7 @@ class AnimalSeeder extends Seeder
             ['name' => 'Paco', 'species' => 'Loro', 'age' => 12],
      ];
 
-     //para cada ani
+     //para cada animal 
  foreach ($animals as $animal) {
 
     DB::insert(
