@@ -9,7 +9,7 @@ use App\Http\Controllers\AnimalController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+/*
 Route::get('/usuarios', [UserController::class, 'index']);
 
 Route::get('/dashboard', function () {
@@ -32,6 +32,10 @@ Route::delete('animales/{id}', [AnimalController::class, 'destroy'])->name('anim
 Route::post('/animales/reset', [AnimalController::class, 'reset'])->name('animales.reset');
 
 
+*/
+Route::resource('/animales', AnimalController::class);
+
+Route::post('/animales/reset', [AnimalController::class, 'reset'])->name('animales.reset');
 
 
 

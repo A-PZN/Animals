@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 //importamos el contrato 
 use App\Contracts\AnimalServiceInterface;
 //importamos el servicio de archivos planos 
-use App\Services\FileAnimalService;
+use App\Services\SQLAnimalService;
 // \App\Services\SessionAnimalService;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         //vinculamos la clase con la interfaz 
         $this->app->bind(
            AnimalServiceInterface::class,
-           FileAnimalService::class
+           SQLAnimalService::class
            
         );
     }
