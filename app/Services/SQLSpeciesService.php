@@ -19,7 +19,7 @@ class SQLSpeciesService implements SpeciesServiceInterface
         return $species;
     }
 
-    public function find(string $id): array
+    public function find(string $id): ?array
     {
       $item =DB::table($this->table)
       ->where('id',$id)
@@ -41,7 +41,7 @@ class SQLSpeciesService implements SpeciesServiceInterface
         return $this->find($id);
     }
 
-    public function update(string $id, array $data): array
+    public function update(string $id, array $data): ?array
     {
 
         DB::table('species')

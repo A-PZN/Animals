@@ -14,14 +14,14 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
-                @forelse ($species as $id => $item)
+                @forelse ($species as $item)
                 <tr class="hover:bg-slate-50">
-                    <td class="py-3 px-6 font-mono text-xs text-slate-400">#{{ $id }}</td>
+                    <td class="py-3 px-6 font-mono text-xs text-slate-400">#{{ $item['id'] }}</td>
                     <td class="py-3 px-6 font-medium">{{ $item['name'] }}</td>
                     <td class="py-3 px-6 text-right space-x-2">
-                        <a href="{{ route('species.show', $id) }}" class="text-slate-500 hover:underline">Ver</a>
-                        <a href="{{ route('species.edit', $id) }}" class="text-indigo-600 hover:underline">Editar</a>
-                        <form action="{{ route('species.destroy', $id) }}" method="POST" class="inline" onsubmit="return confirm('¿Borrar?');">
+                        <a href="{{ route('species.show', $item['id']) }}" class="text-slate-500 hover:underline">Ver</a>
+                        <a href="{{ route('species.edit', $item['id']) }}" class="text-indigo-600 hover:underline">Editar</a>
+                        <form action="{{ route('species.destroy', $item['id']) }}" method="POST" class="inline" onsubmit="return confirm('¿Borrar?');">
                             @csrf @method('DELETE')
                             <button class="text-rose-600 hover:underline">Eliminar</button>
                         </form>
