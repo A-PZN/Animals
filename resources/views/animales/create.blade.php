@@ -3,7 +3,7 @@
 @section('content')
  <div class=" max-w-4xl mx-auto space-y-8 bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-700">
         <h2 class="text-2xl font-bold  mb-4 flex items-center gap-2">
-            Registra a tu mascota
+            Registra a  un nuevo animal 
         </h2>
 
          <p class="text-gray-200 text-lg mb-4">
@@ -15,24 +15,24 @@
             @csrf
             <!--Campo  Nombre -->
             <div class="flex flex-col">
-                <label for="nombre" class="text-sm font-semibold text-white mb-1"></label>
-                <input type="text" name="nombre" id="nombre" 
+                <label for="names" class="text-sm font-semibold text-white mb-1"></label>
+                <input type="text" name="name" id="name" 
                        class="bg-gray-700 border  text-white rounded-lg px-4 py-2 focus:outline-none focus:border-fuchsia-400 focus:ring-1 focus:ring-teal-500 transition"
                        placeholder="Nombre" required>
             </div>
 
              <!--Campo  Edad -->
             <div class="flex flex-col">
-                <label for="Edad" class="text-sm font-semibold text-white mb-1"></label>
-                <input type="number" name="edad" id="edad" 
+                <label for="age" class="text-sm font-semibold text-white mb-1"></label>
+                <input type="number" name="age" id="age" 
                        class="bg-gray-700 border  text-white rounded-lg px-4 py-2 focus:outline-none focus:border-fuchsia-400 focus:ring-1 focus:ring-teal-500 transition"
                        placeholder="Edad" required>
             </div>
 
             <!-- Select -->
             <div class="flex flex-col">
-                <label for="especie" class="text-sm font-semibold text-gray-400 mb-1"></label>
-                <select name="especie" id="especie" 
+                <label for="species" class="text-sm font-semibold text-gray-400 mb-1"></label>
+                <select name="species" id="species" 
                         class="bg-gray-700 border  text-white rounded-lg px-4 py-2 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition appearance-none cursor-pointer"
                         required>
                     <option value="" disabled selected>Seleccionar...</option>

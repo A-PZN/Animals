@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\SpecieController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,6 +39,11 @@ Route::post('/animales/reset', [AnimalController::class, 'reset'])->name('animal
 Route::resource('/animales', AnimalController::class);
 
 Route::post('/animales/reset', [AnimalController::class, 'reset'])->name('animales.reset');
+
+
+Route::resource('/species', SpecieController::class);
+Route::post('/species/reset', [SpecieController::class, 'reset'])->name('species.reset');
+
 
 
 

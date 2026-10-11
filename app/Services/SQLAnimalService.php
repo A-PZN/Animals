@@ -6,6 +6,7 @@ use App\Contracts\AnimalServiceInterface;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\AnimalNotFoundException;
 
+
 class SQLAnimalService implements AnimalServiceInterface
 {
 

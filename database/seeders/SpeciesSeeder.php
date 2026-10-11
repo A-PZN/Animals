@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Contracts\SpeciesServiceInterface;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class SpeciesSeeder extends Seeder
 {
+    //se invoca la interfaz 
+    protected SpeciesServiceInterface $speciesService;
+
+    public function __construct(SpeciesServiceInterface $speciesService){
+        $this->speciesService=$speciesService;
+    }
+
+
+
     /**
      * Run the database seeds.
      */
@@ -19,23 +29,16 @@ class SpeciesSeeder extends Seeder
             ['name'=>'Léon'],
             ['name'=> 'Elefante'],
             ['name'=> 'Pez Payaso'],
-            ['name'=> 'Gato'],
-            ['name'=> 'Perro'],
-            ['name'=> 'Conejo '],
-            ['name'=> 'Caballo'],
-            ['name'=> 'Oso'],
-            ['name'=> 'Ave'],
-            ['name'=> 'Tortuga']
+        
         ];
 
-    foreach ($species as $spe){
+        //para que se pueda insertar todaas las veces la miama cantidad de elmentos 
+        //se llamara el rest del servicio 
+        $this->speciesService->reset();
+        
+        foreach ($species as $spe){
+            $this->speciesService->create($spe);
 
-            DB::insert(
-                'INSERT INTO  species(name) VALUES(?)',
-                [
-                    $spe['name'],
-                ]
-            );
         }
     }
 }

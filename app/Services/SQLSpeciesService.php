@@ -4,55 +4,53 @@ namespace App\Services;
 
 use App\Contracts\SpeciesServiceInterface;
 use Illuminate\Support\Facades\DB;
-use App\Exceptions\AnimalNotFoundException;
 
 class SQLSpeciesService implements SpeciesServiceInterface
 {
+    protected string $table ='species';
 
     public function all(): array
     {
-        $rows = DB::select('SELECT id, name FROM species');
+        $species=DB::table('species')
+        ->get()//devuelve un coleccion de objetos stdclass
+        ->map(fn($item) => (array) $item)//lo castea 
+        ->toArray();
 
-        $result = array_map(function ($row) {
-            return (array) $row;
-        }, $rows);
-
-        return $result;
+        return $species;
     }
 
     public function find(string $id): array
     {
-        $row = DB::selectOne('SELECT id, name  FROM species WHERE id = ?', [$id]);
+      $item =DB::table($this->table)
+      ->where('id',$id)
+      ->first();
 
-        if (!$row) {
-            AnimalNotFoundException::forId($id);
-        }
+    //se castea  el objeto stdClass a un arreglo asociativo
+      return $item ?(array) $item :null;
 
-        return (array) $row;
     }
 
     public function create(array $data): array
     {
-        DB::insert( 'INSERT INTO species (name) VALUES (?)',[$data['name']]);
+        //inserta y retorna el id 
+       $id = DB::table('species')->insertGetId([
+      'name' => $data['name'],
+        ]);
 
-        $id = DB::getPdo()->lastInsertId();
-
+        //se guardan los datos y retorna un array 
         return $this->find($id);
     }
 
     public function update(string $id, array $data): array
     {
-        // 1. Verificación previa (falla rápido con 404):
-        $this->find($id);
 
-        // 2. Sentencia SQL con los nuevos datos:
-        DB::update( 'UPDATE species SET name = ?  WHERE id = ?',
-            [
-                $data['name'],
-                $id
-            ]
-        );
+        DB::table('species')
+        ->where('id', $id)
+        ->update([
+        'name' => $data['name'],
+        ]);
 
+        //se actulaliza y retorna un array
         return $this->find($id);
     }
 
@@ -61,18 +59,25 @@ class SQLSpeciesService implements SpeciesServiceInterface
         // Asegura existencia o lanza excepción:
         $this->find($id);
 
-        $affected = DB::delete(
-            'DELETE FROM species WHERE id = ?',
-            [$id]
-        );
+        $deleted = DB::table('species')
+        ->where('id', $id)
+        ->delete();
 
-        return $affected > 0;
+        return $deleted > 0; 
     }
 
     public function reset(): void
     {
-        DB::statement('DELETE FROM species');
+        DB::table($this->table)->delete();
         // Reiniciar el puntero autoincremental de SQLite
-        DB::statement( "DELETE FROM sqlite_sequence WHERE name = 'species'");
+        DB::statement( "DELETE FROM sqlite_sequence WHERE name = '{$this->table}'");
+
+        $now = now();
+        DB::table($this->table)->insert([
+        ['name' => 'Perro'],
+        ['name' => 'Gato' ],
+        ['name' => 'Loro' ],
+        ]);
+
     }
 }
