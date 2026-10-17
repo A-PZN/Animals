@@ -1,36 +1,55 @@
 <x-layout>
     <x-slot:title>Listado de Especies</x-slot:title>
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold text-slate-900">Especies</h1>
-        <a href="{{ route('species.create') }}" class="px-4 py-2 text-sm text-white bg-indigo-600 rounded-lg hover:bg-indigo-700">+ Nueva</a>
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div>
+            <h1 class="text-2xl font-bold tracking-tight text-slate-100">Especies</h1>
+            <p class="text-sm text-slate-400 mt-1">Gestión y clasificación de especies animales.</p>
+        </div>
+        <a href="{{ route('species.create') }}"
+           class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition shadow-sm">
+            + Nueva Especie
+        </a>
     </div>
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-        <table class="w-full text-left text-sm">
-            <thead class="bg-slate-50 border-b text-xs text-slate-500 uppercase">
-                <tr>
+
+    <div class="bg-slate-800/60 rounded-xl shadow-sm border border-slate-700 overflow-hidden">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-slate-800 border-b border-slate-700 text-xs uppercase font-semibold text-slate-400 tracking-wider">
                     <th class="py-3 px-6">ID</th>
-                    <th class="py-3 px-6">Nombre</th>
+                    <th class="py-3 px-6">Nombre de la Especie</th>
                     <th class="py-3 px-6 text-right">Acciones</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100">
+            <tbody class="divide-y divide-slate-700 text-sm">
                 @forelse ($species as $item)
-                <tr class="hover:bg-slate-50">
-                    <td class="py-3 px-6 font-mono text-xs text-slate-400">#{{ $item['id'] }}</td>
-                    <td class="py-3 px-6 font-medium">{{ $item['name'] }}</td>
-                    <td class="py-3 px-6 text-right space-x-2">
-                        <a href="{{ route('species.show', $item['id']) }}" class="text-slate-500 hover:underline">Ver</a>
-                        <a href="{{ route('species.edit', $item['id']) }}" class="text-indigo-600 hover:underline">Editar</a>
-                        <form action="{{ route('species.destroy', $item['id']) }}" method="POST" class="inline" onsubmit="return confirm('¿Borrar?');">
-                            @csrf @method('DELETE')
-                            <button class="text-rose-600 hover:underline">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
+                    <tr class="hover:bg-slate-700/40 transition-colors">
+                        <td class="py-4 px-6 font-mono text-xs text-slate-400">#{{ $item['id'] }}</td>
+                        <td class="py-4 px-6 font-medium text-slate-100">
+                            <a href="{{ route('species.show', $item['id']) }}" class="hover:underline hover:text-indigo-300">
+                                {{ $item['name'] }}
+                            </a>
+                        </td>
+                        <td class="py-4 px-6 text-right">
+                            <div class="inline-flex items-center gap-2">
+                                <a href="{{ route('species.show', $item['id']) }}" class="text-xs text-slate-400 hover:text-slate-100 font-medium">Ver</a>
+                                <span class="text-slate-600">|</span>
+                                <a href="{{ route('species.edit', $item['id']) }}" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium">Editar</a>
+                                <span class="text-slate-600">|</span>
+                                <form action="{{ route('species.destroy', $item['id']) }}" method="POST" onsubmit="return confirm('¿Seguro que deseas eliminar esta especie?');" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-xs text-rose-400 hover:text-rose-300 font-medium">Eliminar</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
                 @empty
-                <tr>
-                    <td colspan="3" class="py-8 text-center text-slate-400">No hay especies registradas.</td>
-                </tr>
+                    <tr>
+                        <td colspan="3" class="py-12 text-center text-slate-400">
+                            No hay especies registradas actualmente.
+                        </td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>

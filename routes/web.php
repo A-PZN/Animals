@@ -36,9 +36,9 @@ Route::post('/animales/reset', [AnimalController::class, 'reset'])->name('animal
 
 
 */
-Route::resource('/animales', AnimalController::class);
+Route::resource('/animals', AnimalController::class);
 
-Route::post('/animales/reset', [AnimalController::class, 'reset'])->name('animales.reset');
+Route::post('/animals/reset', [AnimalController::class, 'reset'])->name('animals.reset');
 
 
 Route::resource('/species', SpecieController::class);

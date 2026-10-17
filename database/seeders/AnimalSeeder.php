@@ -2,37 +2,37 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Contracts\AnimalServiceInterface;
 
 class AnimalSeeder extends Seeder
 {
+    public function __construct(
+        protected SpeciesSeeder $speciesSeeder,
+        protected AnimalServiceInterface $animalService
+    ) {
+    }
+
     /**
      * Run the database seeds.
      */
-    //se crea un metodo run que  muestra los  datos iniciales 
     public function run(): void
     {
+        // PASO 2: Asumiendo que las especies ya han sido creadas, podemos crear los animales con sus relaciones
         $animals = [
-            ['name' => 'Milo', 'species' => 'Perro', 'age' => 5],
-            ['name' => 'Luna', 'species' => 'Gato', 'age' => 2],
-            ['name' => 'Paco', 'species' => 'Loro', 'age' => 12],
-     ];
+            ['name' => 'Milo', 'species_id' => 1, 'age' => 5],
+            ['name' => 'Luna', 'species_id' => 2, 'age' => 2],
+            ['name' => 'Paco', 'species_id' => 3, 'age' => 12],
+            ['name' => 'Simba', 'species_id' => 4, 'age' => 4],
+            ['name' => 'Nemo', 'species_id' => 5, 'age' => 1],
+        ];
 
-     //para cada animal 
- foreach ($animals as $animal) {
+        $this->animalService->reset();
 
-    DB::insert(
- '      INSERT INTO animals (name, species, age) VALUES(?, ?, ?)',
-            [
-                $animal['name'],
-                $animal['species'], 
-                $animal['age']
-                
-            ]
-        );
-        }
+        foreach ($animals as $animal) {
+            $this->animalService->create($animal);
         }
     }
+}
 

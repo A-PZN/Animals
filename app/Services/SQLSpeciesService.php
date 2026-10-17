@@ -12,6 +12,7 @@ class SQLSpeciesService implements SpeciesServiceInterface
     public function all(): array
     {
         $species=DB::table('species')
+        ->orderBy('id','asc') //ordena asendentemente 
         ->get()//devuelve un coleccion de objetos stdclass
         ->map(fn($item) => (array) $item)//lo castea 
         ->toArray();
@@ -23,9 +24,9 @@ class SQLSpeciesService implements SpeciesServiceInterface
     {
       $item =DB::table($this->table)
       ->where('id',$id)
-      ->first();
+      ->first();//devuelve solo un obj de stclass
 
-    //se castea  el objeto stdClass a un arreglo asociativo
+    //se castea  el objeto stdClass a un arreglo asociativo si no devuelve null
       return $item ?(array) $item :null;
 
     }
@@ -33,6 +34,7 @@ class SQLSpeciesService implements SpeciesServiceInterface
     public function create(array $data): array
     {
         //inserta y retorna el id 
+        //es un insert y select 
        $id = DB::table('species')->insertGetId([
       'name' => $data['name'],
         ]);

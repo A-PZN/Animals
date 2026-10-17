@@ -1,25 +1,37 @@
 <x-layout>
     <x-slot:title>Editar Especie</x-slot:title>
+
     <div class="max-w-lg mx-auto">
-        <a href="{{ route('species.index') }}" class="text-sm text-indigo-600 hover:underline">← Volver</a>
-        <h1 class="text-2xl font-bold text-slate-900 mt-2 mb-6">Editar Especie #{{ $species['id'] }}</h1>
-        <form action="{{ route('species.update', $id) }}" method="POST" class="bg-white p-6 rounded-xl border border-slate-200">
+        <div class="mb-6">
+            <a href="{{ route('species.index') }}" class="text-sm font-medium text-indigo-400 hover:text-indigo-300 hover:underline">← Volver al listado</a>
+            <h1 class="text-2xl font-bold tracking-tight text-slate-100 mt-2">Editar Especie</h1>
+        </div>
+
+        <form action="{{ route('species.update', $species['id']) }}" method="POST" class="bg-slate-800/60 p-6 rounded-xl shadow-sm border border-slate-700">
             @csrf
             @method('PUT')
+
             <div class="space-y-4">
                 <div>
-                    <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
-                    <input type="text" name="name" id="name" value="{{ old('name', $species['name']) }}"
-                        @class([ 'w-full px-3.5 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2' , 'border-rose-300 focus:border-rose-500'=> $errors->has('name'),
-                    'border-slate-300 focus:border-indigo-500' => ! $errors->has('name'),
-                    ])>
+                    <label for="name" class="block text-sm font-medium text-slate-300 mb-1">Nombre</label>
+                    <input type="text"
+                           name="name"
+                           id="name"
+                           value="{{ old('name', $species['name']) }}"
+                           @class([
+                               'w-full px-3.5 py-2 rounded-lg border text-sm transition focus:outline-none focus:ring-2',
+                               'border-rose-500 bg-slate-900 text-slate-100 placeholder-slate-500 focus:border-rose-400 focus:ring-rose-500/20' => $errors->has('name'),
+                               'border-slate-600 bg-slate-900 text-slate-100 placeholder-slate-500 focus:border-indigo-400 focus:ring-indigo-500/20' => ! $errors->has('name'),
+                           ])>
+
                     @error('name')
-                    <p class="text-xs text-rose-600 mt-1 font-medium">{{ $message }}</p>
+                        <p class="text-xs text-rose-400 mt-1.5 font-medium">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="pt-4 flex justify-end gap-3 border-t">
-                    <a href="{{ route('species.index') }}" class="px-4 py-2 text-sm text-slate-600">Cancelar</a>
-                    <button type="submit" class="px-4 py-2 text-sm text-white bg-indigo-600 rounded-lg">Actualizar</button>
+
+                <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-700">
+                    <a href="{{ route('species.index') }}" class="px-4 py-2 text-sm font-medium text-slate-300 hover:bg-slate-700 rounded-lg transition">Cancelar</a>
+                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition shadow-sm">Actualizar</button>
                 </div>
             </div>
         </form>

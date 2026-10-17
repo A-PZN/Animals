@@ -13,14 +13,12 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-
-    //llamamos a la clase seeder
     public function run(): void
     {
-        // User::factory(10)->create();
-        $this->call([ SpeciesSeeder::class,
+        // PASO 1: Cambiar el orden de los seeders para que SpeciesSeeder se ejecute antes que AnimalSeeder
+        $this->call([
+            SpeciesSeeder::class,
+            AnimalSeeder::class,
         ]);
-
-        
     }
 }
